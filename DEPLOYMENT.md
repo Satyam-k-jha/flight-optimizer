@@ -26,6 +26,7 @@ This guide will help you deploy your full-stack application for free using **Ver
 4.  **Configure the Service:**
     - **Name:** `flight-optimizer-api`
     - **Runtime:** `Docker` (Render will auto-detect the Dockerfile).
+    - **Root Directory:** Leave this **BLANK** (empty). This is critical for the build to find all project files.
     - **Region:** Choose one close to you.
     - **Free Instance Type:** Select the Free tier.
 5.  **Environment Variables:**

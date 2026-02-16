@@ -2,13 +2,12 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copy solution and csproj files
-COPY ["FlightOptimizer.slnx", "./"]
+# Copy all project files to their respective locations
 COPY ["FlightOptimizer.API/FlightOptimizer.API.csproj", "FlightOptimizer.API/"]
 COPY ["FlightOptimizer.Core/FlightOptimizer.Core.csproj", "FlightOptimizer.Core/"]
 COPY ["FlightOptimizer.Infrastructure/FlightOptimizer.Infrastructure.csproj", "FlightOptimizer.Infrastructure/"]
 
-# Restore dependencies
+# Restore dependencies for the API project
 RUN dotnet restore "FlightOptimizer.API/FlightOptimizer.API.csproj"
 
 # Copy the rest of the source code
