@@ -1,0 +1,6 @@
+@FlightOptimizer.API_HostAddress = http://localhost:5081
+
+GET {{FlightOptimizer.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,37 @@
+<div class="min-h-screen flex flex-col h-screen">
+  <header class="bg-indigo-700 text-white p-4 shadow-md z-10 flex-shrink-0">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold tracking-tight">FlightRouteOptimizer</h1>
+      <span class="text-sm opacity-75">Spatial Graph Engine</span>
+    </div>
+  </header>
+
+  <main class="flex-grow flex flex-col md:flex-row h-full overflow-hidden relative">
+    <!-- Sidebar -->
+    <div class="w-full md:w-1/3 lg:w-1/4 p-4 bg-gray-100 overflow-y-auto z-10 shadow-lg flex-shrink-0">
+      <app-search (search)="onSearch($event)"></app-search>
+
+      <div *ngIf="loading" class="mt-4 text-center p-4">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mx-auto"></div>
+        <p class="mt-2 text-gray-600">Calculating optimal path...</p>
+      </div>
+
+      <div *ngIf="error" class="mt-4 p-4 rounded-md border shadow-sm" [ngClass]="{
+             'bg-red-100 text-red-800 border-red-200': errorType === 'critical',
+             'bg-yellow-100 text-yellow-800 border-yellow-200': errorType === 'warning'
+           }">
+        <div class="flex items-center">
+          <span class="material-icons mr-2">{{ errorType === 'critical' ? 'error' : 'warning' }}</span>
+          <span class="font-medium">{{ error }}</span>
+        </div>
+      </div>
+
+      <app-results [result]="searchResult"></app-results>
+    </div>
+
+    <!-- Map Area -->
+    <div class="w-full md:w-2/3 lg:w-3/4 relative h-full">
+      <app-map></app-map>
+    </div>
+  </main>
+</div>

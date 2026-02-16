@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="FlightOptimizer.API/FlightOptimizer.API.csproj" />
+  <Project Path="FlightOptimizer.Core/FlightOptimizer.Core.csproj" />
+  <Project Path="FlightOptimizer.Infrastructure/FlightOptimizer.Infrastructure.csproj" />
+</Solution>
