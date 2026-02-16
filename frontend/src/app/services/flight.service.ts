@@ -27,11 +27,13 @@ export interface PathResult {
   message?: string;
 }
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class FlightService {
-  private apiUrl = 'http://localhost:5200/api/flights';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -41,15 +43,15 @@ export class FlightService {
       .set('destination', dest)
       .set('criteria', criteria);
 
-    return this.http.get<PathResult>(`${this.apiUrl}/search`, { params });
+    return this.http.get<PathResult>(`${this.apiUrl}/flights/search`, { params });
   }
 
   getRestrictedZones(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/restricted-zones`);
+    return this.http.get<any[]>(`${this.apiUrl}/flights/restricted-zones`);
   }
 
   searchAirports(query: string): Observable<any[]> {
     const params = new HttpParams().set('query', query);
-    return this.http.get<any[]>(`${this.apiUrl.replace('/api/flights', '/api/airports')}/search`, { params });
+    return this.http.get<any[]>(`${this.apiUrl}/airports/search`, { params });
   }
 }
