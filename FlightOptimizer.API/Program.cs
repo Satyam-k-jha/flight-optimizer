@@ -12,9 +12,21 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // DB Config
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), 
-        x => x.UseNetTopologySuite()));
+var dbProvider = builder.Configuration.GetValue<string>("DbProvider");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+if (dbProvider == "PostgreSQL")
+{
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseNpgsql(connectionString,
+            x => x.UseNetTopologySuite()));
+}
+else
+{
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(connectionString, 
+            x => x.UseNetTopologySuite()));
+}
 
 // Repositories
 builder.Services.AddScoped<IAirportRepository, AirportRepository>();

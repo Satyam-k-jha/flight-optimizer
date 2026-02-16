@@ -25,6 +25,9 @@ namespace FlightOptimizer.Infrastructure.Services
 
         public async Task SeedAsync()
         {
+            // Ensure Database Exists (creates schema if missing, useful for Docker/Prod)
+            await _context.Database.EnsureCreatedAsync();
+
             // Path Setup
             string basePath = Path.Combine(Directory.GetCurrentDirectory(), "ExternalData");
             string airportsPath = Path.Combine(basePath, "airports.dat");
